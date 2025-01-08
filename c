@@ -1,5 +1,6 @@
 import pygame
 
+sprites = pygame.sprite.Group()
 pygame.init()
 pygame.display.set_caption("Ancient City")
 screen_width=500
@@ -28,6 +29,24 @@ class Player(pygame.sprite.Sprite):
         elif self.rect.right>screen_width:
             self.rect.right=screen_width
         if self.rect.top <=0:
-            self.rect.top<=0:
+            self.rect.top<=0
         elif self.rect.bottom >= screen_height:
             self.rect.bottom = screen_height
+
+def startgame():
+    player=Player()
+    sprites.add(player)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit(0)
+        pressed_keys=pygame.key.get_pressed()
+        player.update(pressed_keys)
+
+        screen.blit(pygame.image.load("ancientcity3"),(0,0))
+        sprites.draw(screen)
+
+        pygame.display.update()
+startgame()
